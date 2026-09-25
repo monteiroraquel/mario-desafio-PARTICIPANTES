@@ -1,10 +1,45 @@
 # 🍄 Mario Debug Challenge — Liga Acadêmica
 
 Bem-vindo(a)! Vocês receberam uma versão **quebrada** do clássico Super Mario
-Bros (base original por [Liga Acadêmica - UFVJM](https://github.com/josuejuca/Super-Mario-Bros),
-usada apenas para fins educacionais). Alguém "sabotou" o código com **10
+Bros Liga Acadêmica - UFVJMusada apenas para fins educacionais. Alguém "sabotou" o código com **10
 bugs** espalhados pelo jogo. Sua equipe tem **3h30 (210 minutos)** para
 encontrar e corrigir o máximo de bugs possível.
+
+## 🏰 A história
+
+**🍄 O Reino Cogumelo está em perigo!**
+
+Bowser invadiu o sistema que mantém o Reino Cogumelo funcionando e espalhou
+bugs pelo código. Moedas deixaram de ser contabilizadas corretamente,
+pontuações foram alteradas, blocos pararam de reagir e até os inimigos
+começaram a se comportar de maneira inesperada.
+
+Mario percebeu que não conseguiria resolver todos os problemas sozinho e
+convocou os maiores heróis do reino para uma missão: restaurar o jogo antes
+que Bowser consiga assumir o controle.
+
+Cada equipe representa um personagem do universo Mario. Durante a
+competição, os participantes deverão avançar pelo Reino Cogumelo, investigar
+os problemas encontrados e corrigir os bugs escondidos no código.
+
+A jornada começa com problemas simples e, conforme as equipes avançam, os
+desafios se tornam mais complexos. No final, os participantes chegarão ao
+Castelo de Bowser, onde estarão os últimos problemas do sistema.
+
+## 👥 As equipes
+
+Cada equipe poderá representar um personagem do universo Mario. A identidade
+dos personagens é principalmente narrativa e visual: todas as equipes
+enfrentam os mesmos desafios e possuem as mesmas condições.
+
+| Equipe | Personagem |
+|---|---|
+| Equipe Mario | Mario |
+| Equipe Luigi | Luigi |
+| Equipe Peach | Peach |
+| Equipe Yoshi | Yoshi |
+| Equipe Toad | Toad |
+| Equipe Daisy | Daisy |
 
 ## Como rodar o jogo
 
@@ -13,7 +48,14 @@ pip install pygame pytmx
 python main.py
 ```
 
-Controles: Setas (mover), Cima (pular), Shift (correr / atirar fireball com power-up de fogo).
+## 🎮 Controles
+
+| Tecla | Ação |
+|---|---|
+| **Enter** | Começar o jogo (na tela inicial) |
+| **→** / **←** | Andar para a direita / esquerda |
+| **↑** | Pular (segure para pular mais alto; solte cedo para um pulo baixo) |
+| **Shift esquerdo** | Correr. Com a flor de fogo, também atira bolas de fogo |
 
 ## Regras
 
@@ -21,7 +63,9 @@ Controles: Setas (mover), Cima (pular), Shift (correr / atirar fireball com powe
 2. Cada bug abaixo já vem com o **arquivo onde ele está** e uma **descrição
    do que deveria acontecer no jogo**. O trabalho de vocês é entender o
    código daquele arquivo, achar o trecho responsável por aquele
-   comportamento, entender por que ele está errado, e corrigir.
+   comportamento, entender por que ele está errado, e corrigir. Em algumas
+   missões, parte do código foi apagada: nesses casos, vocês vão precisar
+   completá-lo.
 3. **Não é permitido** simplesmente reescrever o jogo do zero ou copiar a
    versão original do GitHub — o objetivo é *debugar*, não substituir.
 4. Cada correção deve alterar o **mínimo necessário** de código. Correções
@@ -53,13 +97,14 @@ esperado: ele deveria **virar de direção e continuar andando normalmente**,
 como um "ricochete". Em vez disso, algo estranho acontece nesse momento —
 o inimigo trava ou fica vibrando no lugar, sem seguir em frente.
 
-**#3 — Cogumelo anda para o lado errado**
+**#3 — O cogumelo não sai do lugar**
 📁 Arquivo: `Mushroom.py`
 Quebre um bloco de interrogação que solta um cogumelo (power-up de
-crescimento). Observe pra que lado ele começa a se mover assim que
-"nasce". O comportamento clássico do jogo é o cogumelo sair andando **na
-mesma direção geral que o Mario estava indo** quando o bloco foi
-ativado — aqui ele está saindo para o lado oposto ao esperado.
+crescimento). Observe o que ele faz assim que "nasce". O comportamento
+clássico do jogo é o cogumelo sair andando **na direção leste (direita)**
+logo depois de sair do bloco — aqui ele fica parado, sem andar para
+nenhum dos lados. O trecho de código que deveria colocar o cogumelo em
+movimento está incompleto: vocês vão precisar escrevê-lo.
 
 ---
 
@@ -84,15 +129,19 @@ de um tempinho a imagem para de mudar, como se ele "travasse" visualmente
 📁 Arquivo: `Player.py`
 Colete duas ou mais moedas seguidas e observe o número de moedas mostrado
 no HUD (canto da tela). O esperado é que o contador **acumule** — 1, depois
-2, depois 3... Mas o comportamento atual não é esse.
+2, depois 3... Aqui ele fica parado em 0, não importa quantas moedas o
+Mario pegue. O trecho de código que deveria somar as moedas está
+incompleto: vocês vão precisar escrevê-lo.
 
-**#7 — Casco chutado vai contra o jogador**
+**#7 — Casco chutado não sai do lugar**
 📁 Arquivo: `Koopa.py`
 Pule em cima de um Koopa (tartaruga) até ele virar um casco parado, e
 depois encoste nele de novo pra "chutá-lo". O casco deveria sair
 deslizando **para longe do Mario** (na direção contrária de onde o Mario
 está), pra ele poder usar o casco como arma contra outros inimigos sem se
-machucar. Aqui, o casco está indo na direção errada.
+machucar. Aqui, o casco continua parado depois do chute. O trecho de
+código que deveria dar velocidade ao casco está incompleto: vocês vão
+precisar escrevê-lo.
 
 ---
 
@@ -101,22 +150,23 @@ machucar. Aqui, o casco está indo na direção errada.
 **#8 — O jogo nunca acaba quando o Mario perde todas as vidas**
 📁 Arquivo: `Map.py`
 O Mario começa com 3 vidas. Percam de propósito as 3 vidas seguidas (deixe
-o Mario morrer 3 vezes) e observem o que acontece na terceira morte. O
-esperado é que apareça uma tela de "Fim de Jogo" (Game Over). Isso não está
-acontecendo — o jogo simplesmente continua reiniciando o Mario como se
-nada tivesse acontecido. Dica de raciocínio: pensem em qual número exato
-representa "não sobrou nenhuma vida" e comparem com o número que está
-sendo checado no código.
+o Mario morrer 3 vezes) e observem o que acontece a cada morte. O esperado
+é que o Mario faça a animação de morte (com o som) e, na terceira morte,
+apareça uma tela de "Fim de Jogo" (Game Over). Isso não está acontecendo —
+o Mario volta na hora para o começo da fase, como se nada tivesse
+acontecido, e o contador de vidas continua descendo sem parar. O trecho de
+código que deveria tratar a morte do Mario está incompleto: vocês vão
+precisar escrevê-lo.
 
 **#9 — A fase nunca termina de verdade**
 📁 Arquivo: `Flag.py`
 Cheguem até o fim da fase e toquem a bandeira. O esperado: a bandeira
 desce até a base do mastro (uma animação rápida), e o Mario é levado pra
 dentro do castelo, encerrando a fase com sucesso. Aqui, a bandeira começa a
-descer... e nunca chega a terminar essa descida, deixando o jogo travado
-nessa animação para sempre. Dica de raciocínio: existe um valor que marca
-"a bandeira já chegou ao final do mastro" — será que esse valor é
-realmente alcançável, dado até onde a bandeira consegue descer?
+descer... e nunca para: passa do pé do mastro, some pelo chão e o jogo fica
+travado nessa animação para sempre. O trecho de código que deveria
+encerrar a descida da bandeira está incompleto: vocês vão precisar
+escrevê-lo.
 
 **#10 — O Mario fica invencível para sempre depois do primeiro dano**
 📁 Arquivo: `Player.py`

@@ -43,77 +43,77 @@ class Player(object):
             # 0 Pequeno, parado
             pg.image.load('images/Mario/mario.png'),
 
-            # 1 Pequeno, move 0
+            # 1 Pequeno, andando 0
             pg.image.load('images/Mario/mario_move0.png'),
 
-            # 2 Pequeno, move 1
+            # 2 Pequeno, andando 1
             pg.image.load('images/Mario/mario_move1.png'),
 
-            # 3 Pequeno, move 2
+            # 3 Pequeno, andando 2
             pg.image.load('images/Mario/mario_move2.png'),
 
-            # 4 Pequeno, jump
+            # 4 Pequeno, pulo
             pg.image.load('images/Mario/mario_jump.png'),
 
-            # 5 Pequeno, end 0
+            # 5 Pequeno, bandeira 0
             pg.image.load('images/Mario/mario_end.png'),
 
-            # 6 Pequeno, end 1
+            # 6 Pequeno, bandeira 1
             pg.image.load('images/Mario/mario_end1.png'),
 
-            # 7 Pequeno, stop
+            # 7 Pequeno, freando
             pg.image.load('images/Mario/mario_st.png'),
 
             # =============================================
 
-            # 8 grande, stay
+            # 8 grande, parado
             pg.image.load('images/Mario/mario1.png'),
 
-            # 9 grande, move 0
+            # 9 grande, andando 0
             pg.image.load('images/Mario/mario1_move0.png'),
 
-            # 10 grande, move 1
+            # 10 grande, andando 1
             pg.image.load('images/Mario/mario1_move1.png'),
 
-            # 11 grande, move 2
+            # 11 grande, andando 2
             pg.image.load('images/Mario/mario1_move2.png'),
 
-            # 12 grande, jump
+            # 12 grande, pulo
             pg.image.load('images/Mario/mario1_jump.png'),
 
-            # 13 grande, end 0
+            # 13 grande, bandeira 0
             pg.image.load('images/Mario/mario1_end.png'),
 
-            # 14 grande, end 1
+            # 14 grande, bandeira 1
             pg.image.load('images/Mario/mario1_end1.png'),
 
-            # 15 grande, stop
+            # 15 grande, freando
             pg.image.load('images/Mario/mario1_st.png'),
 
             # =============================================
 
-            # 16 grande_fireball, stay
+            # 16 grande com fogo, parado
             pg.image.load('images/Mario/mario2.png'),
 
-            # 17 grande_fireball, move 0
+            # 17 grande com fogo, andando 0
             pg.image.load('images/Mario/mario2_move0.png'),
 
-            # 18 grande_fireball, move 1
+            # 18 grande com fogo, andando 1
             pg.image.load('images/Mario/mario2_move1.png'),
 
-            # 19 grande_fireball, move 2
+            # 19 grande com fogo, andando 2
             pg.image.load('images/Mario/mario2_move2.png'),
 
-            # 20 grande_fireball, jump
+            # 20 grande com fogo, pulo
             pg.image.load('images/Mario/mario2_jump.png'),
 
-            # 21 grande_fireball, end 0
+            # 21 grande com fogo, bandeira 0
             pg.image.load('images/Mario/mario2_end.png'),
 
-            # 22 grande_fireball, end 1
+            # 22 grande com fogo, bandeira 1
             pg.image.load('images/Mario/mario2_end1.png'),
 
-            # 23 grande_fireball, stop
+            # 23 grande com fogo, freando
             pg.image.load('images/Mario/mario2_st.png'),
         ]
 
@@ -471,7 +471,7 @@ class Player(object):
             self.rect.top += self.y_vel
             self.update_y_pos(blocks, core)
 
-            # on_ground works incorrect without this piece of code
+            # on_ground não funciona direito sem este trecho de código
             x = self.rect.x // 32
             y = self.rect.y // 32
             if self.powerLVL > 0:
@@ -491,7 +491,8 @@ class Player(object):
         self.next_fireball_time = pg.time.get_ticks() + 400
 
     def add_coins(self, count):
-        self.coins = count
+        # continuar ... 
+        pass
 
     def add_score(self, count):
         self.score += count

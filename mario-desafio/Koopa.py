@@ -69,7 +69,7 @@ class Koopa(Entity):
         self.state += 1
         self.current_image = 2
 
-        # 0 de 1 state
+        # Estado 0 para 1
         if self.rect.h == 46:
             self.x_vel = 0
             self.rect.h = 32
@@ -77,17 +77,20 @@ class Koopa(Entity):
             core.get_map().get_player().add_score(100)
             core.get_map().spawn_score_text(self.rect.x + 16, self.rect.y, score=100)
 
-        # 1 de 2
+        # Estado 1 para 2
         elif self.state == 2:
             core.get_map().get_player().add_score(100)
             core.get_map().spawn_score_text(self.rect.x + 16, self.rect.y, score=100)
 
             if core.get_map().get_player().rect.x - self.rect.x <= 0:
-                self.x_vel = -6
-            else:
-                self.x_vel = 6
+               # continuar ... 
+               pass
 
-        # 2 de 3
+            else:
+
+                pass
+
+        # Estado 2 para 3
         elif self.state == 3:
             self.die(core, instantly=False, crushed=False)
 

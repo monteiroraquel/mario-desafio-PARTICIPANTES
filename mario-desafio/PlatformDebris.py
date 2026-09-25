@@ -6,7 +6,7 @@ from Const import *
 class PlatformDebris(object):
     """
 
-    Debris which appears when you destroy a brick block.
+    Pedaços que aparecem quando você quebra um bloco de tijolo.
 
     """
     def __init__(self, x_pos, y_pos):

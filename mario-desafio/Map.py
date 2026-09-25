@@ -23,8 +23,8 @@ from Text import Text
 class Map(object):
     """
 
-    This class contains every map object: tiles, mobs and player. Also,
-    there are camera, event and UI.
+    Esta classe contém todos os objetos do mapa: blocos, inimigos e jogador.
+    Também guarda a câmera, os eventos e a interface (HUD).
 
     """
 
@@ -66,7 +66,7 @@ class Map(object):
         self.sky = pg.Surface((WINDOW_W, WINDOW_H))
         self.sky.fill((pg.Color('#5c94fc')))
 
-        # 2D List
+        # Lista 2D
         self.map = [[0] * tmx_data.height for i in range(tmx_data.width)]
 
         layer_num = 0
@@ -74,28 +74,28 @@ class Map(object):
             for y in range(tmx_data.height):
                 for x in range(tmx_data.width):
 
-                    # Getting pygame surface
+                    # Obtendo a superfície (imagem) do pygame
                     image = tmx_data.get_tile_image(x, y, layer_num)
 
-                    # It's none if there are no tile in that place
+                    # É None quando não há bloco nessa posição
                     if image is not None:
                         tileID = tmx_data.get_tile_gid(x, y, layer_num)
 
                         if layer.name == 'Foreground':
 
-                            # 22 ID is a question block, so in taht case we shoud load all it's images
+                            # O ID 22 é um bloco de interrogação, então carregamos todas as imagens dele
                             if tileID == 22:
                                 image = (
                                     image,                                      # 1
                                     tmx_data.get_tile_image(0, 15, layer_num),   # 2
                                     tmx_data.get_tile_image(1, 15, layer_num),   # 3
-                                    tmx_data.get_tile_image(2, 15, layer_num)    # activated
+                                    tmx_data.get_tile_image(2, 15, layer_num)    # ativado
                                 )
 
-                            # Map class has 1)"map" list, which is used in collision system because we can
-                            # easily get block by x and y coordinate 2)"obj", "obj_bg" and simular arrays -
-                            # they are used in rendering because you don't need to cycle through every
-                            # (x, y) pair. Here we are adding the same platform object in 2 different arrays.
+                            # A classe Map tem 1) a lista "map", usada no sistema de colisão porque
+                            # permite pegar um bloco pelas coordenadas x e y; 2) "obj", "obj_bg" e listas
+                            # parecidas, usadas na renderização para não precisar percorrer todos os
+                            # pares (x, y). Aqui o mesmo objeto de plataforma é adicionado em 2 listas.
                             self.map[x][y] = Platform(x * tmx_data.tileheight, y * tmx_data.tilewidth, image, tileID)
                             self.obj.append(self.map[x][y])
 
@@ -104,7 +104,7 @@ class Map(object):
                             self.obj_bg.append(self.map[x][y])
             layer_num += 1
 
-        # Tubes
+        # Canos
         self.spawn_tube(28, 10)
         self.spawn_tube(37, 9)
         self.spawn_tube(46, 8)
@@ -112,7 +112,7 @@ class Map(object):
         self.spawn_tube(163, 10)
         self.spawn_tube(179, 10)
 
-        # Mobs
+        # Inimigos
         self.mobs.append(Goombas(736, 352, False))
         self.mobs.append(Goombas(1295, 352, True))
         self.mobs.append(Goombas(1632, 352, False))
@@ -181,7 +181,7 @@ class Map(object):
     def get_blocks_for_collision(self, x, y):
         """
 
-        Returns tiles around the entity
+        Retorna os blocos ao redor da entidade
 
         """
         return (
@@ -204,7 +204,7 @@ class Map(object):
     def get_blocks_below(self, x, y):
         """
 
-        Returns 2 blocks below entity to check its on_ground parameter
+        Retorna os 2 blocos abaixo da entidade para verificar o on_ground
 
         """
         return (
@@ -218,9 +218,9 @@ class Map(object):
     def spawn_tube(self, x_coord, y_coord):
         self.tubes.append(Tube(x_coord, y_coord))
 
-        # Adding tube's collision just by spawning tiles inside the tube.
-        # They will not render because we are adding them to "collision" list.
-        for y in range(y_coord, 12): # 12 because it's ground level.
+        # A colisão do cano é feita criando blocos dentro dele.
+        # Eles não são desenhados porque vão só para a lista de colisão.
+        for y in range(y_coord, 12): # 12 porque é o nível do chão.
             for x in range(x_coord, x_coord + 2):
                 self.map[x][y] = Platform(x * 32, y * 32, image=None, type_id=0)
 
@@ -248,23 +248,23 @@ class Map(object):
     def spawn_score_text(self, x, y, score=None):
         """
 
-        This text appears when you, for example, kill a mob. It shows how many points
-        you got.
+        Este texto aparece quando, por exemplo, você mata um inimigo. Ele mostra
+        quantos pontos você ganhou.
 
         """
 
-        # Score is none only when you kill a mob. If you got a killstreak,
-        # amount of points for killing a mob will increase: 100, 200, 400, 800...
-        # So you don't know how many points you should add.
+        # score é None só quando você mata um inimigo. Em uma sequência de abates,
+        # os pontos por inimigo aumentam: 100, 200, 400, 800...
+        # Por isso não dá para saber de antemão quantos pontos somar.
         if score is None:
             self.text_objects.append(Text(str(self.score_for_killing_mob), 16, (x, y)))
 
-            # Next score will be bigger
+            # A próxima pontuação será maior
             self.score_time = pg.time.get_ticks()
             if self.score_for_killing_mob < 1600:
                 self.score_for_killing_mob *= 2
 
-        # That case for all other situations.
+        # Este caso vale para todas as outras situações.
         else:
             self.text_objects.append(Text(str(score), 16, (x, y)))
 
@@ -290,11 +290,11 @@ class Map(object):
     def update_time(self, core):
         """
 
-        Updating a map time.
+        Atualiza o tempo do mapa.
 
         """
 
-        # Time updates only if map not in event
+        # O tempo só corre se o mapa não estiver em um evento
         if not self.in_event:
             self.tick += 1
             if self.tick % 40 == 0:
@@ -308,14 +308,14 @@ class Map(object):
     def update_score_time(self):
         """
 
-        When player kill mobs in a row, score for each mob
-        will increase. When player stops kill mobs, points
-        will reset to 100. This function updates these points.
+        Quando o jogador mata inimigos em sequência, a pontuação de cada
+        um aumenta. Quando ele para de matar inimigos, os pontos
+        voltam para 100. Este método atualiza esses pontos.
 
         """
         if self.score_for_killing_mob != 100:
 
-            # Delay is 750 ms
+            # O intervalo é de 750 ms
             if pg.time.get_ticks() > self.score_time + 750:
                 self.score_for_killing_mob //= 2
 
@@ -327,7 +327,7 @@ class Map(object):
     def try_spawn_mobs(self, core):
         """
 
-        These mobs will appear when player will reach the certain x-coordinate
+        Estes inimigos aparecem quando o jogador alcança certa coordenada x
 
         """
         if self.get_player().rect.x > 2080 and not self.is_mob_spawned[0]:
@@ -338,7 +338,7 @@ class Map(object):
         elif self.get_player().rect.x > 2460 and not self.is_mob_spawned[1]:
             self.spawn_goombas(3200, 352, False)
             self.spawn_goombas(3250, 352, False)
-            self.spawn_koopa(3400, 352, False)
+            self.spawn_koopa(3400, 338, False)
             self.spawn_goombas(3700, 352, False)
             self.spawn_goombas(3750, 352, False)
             self.spawn_goombas(4060, 352, False)
@@ -353,10 +353,11 @@ class Map(object):
         self.get_player().reset_move()
         self.get_player().numOfLives -= 1
 
-        if self.get_player().numOfLives < 0:
-            self.get_event().start_kill(core, game_over=True)
+        if self.get_player().numOfLives == 0:
+            #continuar ...
+            pass
         else:
-            self.get_event().start_kill(core, game_over=False)
+            pass
 
     def player_win(self, core):
         self.in_event = True
@@ -366,41 +367,41 @@ class Map(object):
 
     def update(self, core):
 
-        # All mobs
+        # Todos os inimigos
         self.update_entities(core)
 
         if not core.get_map().in_event:
 
-            # When player eats a mushroom
+            # Quando o jogador come um cogumelo
             if self.get_player().inLevelUpAnimation:
                 self.get_player().change_powerlvl_animation()
 
-            # Unlike the level up animation, player can move there
+            # Ao contrário da animação de crescer, aqui o jogador pode se mover
             elif self.get_player().inLevelDownAnimation:
                 self.get_player().change_powerlvl_animation()
                 self.update_player(core)
 
-            # Common case
+            # Caso comum
             else:
                 self.update_player(core)
 
         else:
             self.get_event().update(core)
 
-        # Debris is 1) Particles which appears when player destroy a brick block
-        # 2) Coins which appears when player activate a "question" platform
+        # Debris são 1) pedaços que aparecem quando o jogador quebra um bloco de tijolo
+        # 2) moedas que aparecem quando o jogador ativa um bloco de interrogação
         for debris in self.debris:
             debris.update(core)
 
-        # Player's fireballs
+        # Bolas de fogo do jogador
         for whizbang in self.projectiles:
             whizbang.update(core)
 
-        # Text which represent how mapy points player get
+        # Textos que mostram quantos pontos o jogador ganhou
         for text_object in self.text_objects:
             text_object.update(core)
 
-        # Camera stops moving when player dies or touches a flag
+        # A câmera para quando o jogador morre ou toca a bandeira
         if not self.in_event:
             self.get_camera().update(core.get_map().get_player().rect)
 
@@ -412,7 +413,7 @@ class Map(object):
     def render_map(self, core):
         """
 
-        Renderizando apenas telhas. É usado no menu principal.
+        Renderiza apenas os blocos. É usado no menu principal.
 
         """
         core.screen.blit(self.sky, (0, 0))
