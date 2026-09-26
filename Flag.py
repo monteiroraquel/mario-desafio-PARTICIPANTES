@@ -20,8 +20,9 @@ class Flag(object):
         self.flag_offset += 3
         self.flag_rect.y += 3
 
-        # continuar ...
-        pass
+        if self.get_player().x_pos == self.get_flag().rect.left:
+            self.get_event().start_win()
+            pass
 
     def render(self, core):
         self.rect = self.pillar_rect

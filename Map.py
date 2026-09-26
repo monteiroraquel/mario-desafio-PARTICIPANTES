@@ -354,8 +354,9 @@ class Map(object):
         self.get_player().numOfLives -= 1
 
         if self.get_player().numOfLives == 0:
-            #continuar ...
-            pass
+            self.game_over = True
+            self.get_event().start_kill(core, True)
+            
         else:
             pass
 
