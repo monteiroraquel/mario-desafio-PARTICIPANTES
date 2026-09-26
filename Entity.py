@@ -26,10 +26,10 @@ class Entity(object):
                 if pg.Rect.colliderect(self.rect, block.rect):
                     if self.x_vel > 0:
                         self.rect.right = block.rect.left
-                        self.x_vel = self.x_vel
+                        self.x_vel = self.x_vel * -1
                     elif self.x_vel < 0:
                         self.rect.left = block.rect.right
-                        self.x_vel = self.x_vel
+                        self.x_vel = self.x_vel * -1
 
     def update_y_pos(self, blocks):
         self.rect.y += self.y_vel * FALL_MULTIPLIER
