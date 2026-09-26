@@ -407,7 +407,7 @@ class Player(object):
             core.get_sound().play('pipe', 0, 0.5)
             self.inLevelDownAnimation = True
             self.inLevelDownAnimationTime = 200
-            self.unkillable = True
+            self.unkillable = False # aqui
             self.unkillableTime = 200
 
         else:
@@ -490,9 +490,8 @@ class Player(object):
         core.get_sound().play('fireball', 0, 0.5)
         self.next_fireball_time = pg.time.get_ticks() + 400
 
-    def add_coins(self, count):
-        # continuar ... 
-        pass
+    def add_coins(self, count): # ok
+        self.coins += count
 
     def add_score(self, count):
         self.score += count

@@ -52,7 +52,7 @@ class Goombas(Entity):
         if self.collision:
             if self.rect.colliderect(core.get_map().get_player().rect):
                 if self.state != -1:
-                    if core.get_map().get_player().y_vel < 0:
+                    if core.get_map().get_player().y_vel > 0:
                         self.die(core, instantly=False, crushed=True)
                         core.get_map().get_player().reset_jump()
                         core.get_map().get_player().jump_on_mob()
@@ -66,6 +66,7 @@ class Goombas(Entity):
             self.current_image = 1
         elif self.image_tick == 28:
             self.current_image = 0
+            self.image_tick = 0
 
     def update(self, core):
         if self.state == 0:

@@ -354,8 +354,7 @@ class Map(object):
         self.get_player().numOfLives -= 1
 
         if self.get_player().numOfLives == 0:
-            #continuar ...
-            pass
+            self.player_death(core)
         else:
             pass
 

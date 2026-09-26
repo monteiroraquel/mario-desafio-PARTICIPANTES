@@ -83,12 +83,10 @@ class Koopa(Entity):
             core.get_map().spawn_score_text(self.rect.x + 16, self.rect.y, score=100)
 
             if core.get_map().get_player().rect.x - self.rect.x <= 0:
-               # continuar ... 
-               pass
-
+                self.x_vel = 4
             else:
-
-                pass
+                self.x_vel = -4
+                
 
         # Estado 2 para 3
         elif self.state == 3:

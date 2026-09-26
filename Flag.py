@@ -20,6 +20,11 @@ class Flag(object):
         self.flag_offset += 3
         self.flag_rect.y += 3
 
+        if self.flag_offset >= 255:
+            self.flag_omitted = True
+ 
+
+ 
         # continuar ...
         pass
 
