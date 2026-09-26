@@ -87,6 +87,7 @@ class Event(object):
                     core.get_map().get_player().reset_move()
                     core.get_map().get_player().reset_jump()
                     core.get_map().reset(False)
+                    core.get_sound().stop('overworld')
                     core.get_sound().play('overworld', 9999999, 0.5)
                 else:
                     core.get_mm().currentGameState = 'Loading'
@@ -129,6 +130,6 @@ class Event(object):
 
                     elif pg.time.get_ticks() >= self.time + self.delay:
                         core.get_mm().currentGameState = 'Loading'
-                        core.get_mm().oLoadingMenu.set_text_and_type('By Liga Acadêmica - UFVJM', False)
+                        core.get_mm().oLoadingMenu.set_text_and_type("By Liga Academica - UFVJM", False)
                         core.get_mm().oLoadingMenu.update_time()
                         core.get_sound().play('game_over', 0, 0.5)

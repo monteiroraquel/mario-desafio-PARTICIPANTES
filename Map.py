@@ -55,6 +55,7 @@ class Map(object):
         self.time = 400
 
         self.oPlayer = Player(x_pos=128, y_pos=351)
+
         self.oCamera = Camera(self.mapSize[0] * 32, 14)
         self.oEvent = Event()
         self.oGameUI = GameUI()
@@ -103,7 +104,7 @@ class Map(object):
                             self.map[x][y] = BGObject(x * tmx_data.tileheight, y * tmx_data.tilewidth, image)
                             self.obj_bg.append(self.map[x][y])
             layer_num += 1
-
+        
         # Canos
         self.spawn_tube(28, 10)
         self.spawn_tube(37, 9)
@@ -225,7 +226,7 @@ class Map(object):
                 self.map[x][y] = Platform(x * 32, y * 32, image=None, type_id=0)
 
     def spawn_mushroom(self, x, y):
-        self.get_mobs().append(Mushroom(x, y, True))
+        self.get_mobs().append(Mushroom(x, y, not self.get_player().direction))
 
     def spawn_goombas(self, x, y, move_direction):
         self.get_mobs().append(Goombas(x, y, move_direction))
@@ -354,10 +355,7 @@ class Map(object):
         self.get_player().numOfLives -= 1
 
         if self.get_player().numOfLives == 0:
-            #continuar ...
-            pass
-        else:
-            pass
+            self.get_event().start_kill(core, True)
 
     def player_win(self, core):
         self.in_event = True

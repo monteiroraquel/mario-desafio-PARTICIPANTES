@@ -39,12 +39,13 @@ class Koopa(Entity):
         if self.collision:
             if self.rect.colliderect(core.get_map().get_player().rect):
                 if self.state != -1:
-                    if core.get_map().get_player().y_vel > 0:
+                    x_direction = core.get_map().get_player().rect.x - self.rect.x <= 0
+                    if core.get_map().get_player().y_vel > 0 or self.state == 1:
                         self.change_state(core)
                         core.get_sound().play('kill_mob', 0, 0.5)
                         core.get_map().get_player().reset_jump()
                         core.get_map().get_player().jump_on_mob()
-                    else:
+                    elif (x_direction - self.x_vel) < 0:
                         if not core.get_map().get_player().unkillable:
                             core.get_map().get_player().set_powerlvl(0, core)
 
@@ -83,12 +84,9 @@ class Koopa(Entity):
             core.get_map().spawn_score_text(self.rect.x + 16, self.rect.y, score=100)
 
             if core.get_map().get_player().rect.x - self.rect.x <= 0:
-               # continuar ... 
-               pass
-
+                self.x_vel = 1
             else:
-
-                pass
+                self.x_vel = -1
 
         # Estado 2 para 3
         elif self.state == 3:

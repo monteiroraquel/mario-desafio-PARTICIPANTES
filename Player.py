@@ -288,7 +288,8 @@ class Player(object):
 
     def update_unkillable_time(self):
         if self.unkillable:
-            if self.unkillableTime == 0:
+            self.unkillableTime -= 1
+            if self.unkillableTime <= 0:
                 self.unkillable = False
 
     def update_x_pos(self, blocks):
@@ -491,8 +492,7 @@ class Player(object):
         self.next_fireball_time = pg.time.get_ticks() + 400
 
     def add_coins(self, count):
-        # continuar ... 
-        pass
+        self.coins += count
 
     def add_score(self, count):
         self.score += count

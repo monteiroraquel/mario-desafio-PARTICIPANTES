@@ -20,8 +20,8 @@ class Flag(object):
         self.flag_offset += 3
         self.flag_rect.y += 3
 
-        # continuar ...
-        pass
+        if self.flag_rect.y >= 300:
+            self.flag_omitted = True
 
     def render(self, core):
         self.rect = self.pillar_rect
