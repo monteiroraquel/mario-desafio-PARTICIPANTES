@@ -24,7 +24,7 @@ class Player(object):
         self.already_jumped = False
         self.next_jump_time = 0
         self.next_fireball_time = 0
-        self.x_vel = 0
+        self.x_vel = 2
         self.y_vel = 0
         self.direction = True
         self.on_ground = False
@@ -491,8 +491,7 @@ class Player(object):
         self.next_fireball_time = pg.time.get_ticks() + 400
 
     def add_coins(self, count):
-        # continuar ... 
-        pass
+        self.coins += count
 
     def add_score(self, count):
         self.score += count

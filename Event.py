@@ -129,6 +129,6 @@ class Event(object):
 
                     elif pg.time.get_ticks() >= self.time + self.delay:
                         core.get_mm().currentGameState = 'Loading'
-                        core.get_mm().oLoadingMenu.set_text_and_type('By Liga Acadêmica - UFVJM', False)
+                        core.get_mm().oLoadingMenu.set_text_and_type('By Liga Academica - UFVJM', False)
                         core.get_mm().oLoadingMenu.update_time()
                         core.get_sound().play('game_over', 0, 0.5)

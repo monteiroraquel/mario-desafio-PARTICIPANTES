@@ -352,11 +352,14 @@ class Map(object):
         self.get_player().reset_jump()
         self.get_player().reset_move()
         self.get_player().numOfLives -= 1
+        
 
         if self.get_player().numOfLives == 0:
-            #continuar ...
+            core.get_sound().play('game_over', 0, 0.5)            
+            self.reset(self.reset)
             pass
         else:
+            core.get_sound().play('death', 0, 0.5)
             pass
 
     def player_win(self, core):

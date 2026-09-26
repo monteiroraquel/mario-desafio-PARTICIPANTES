@@ -15,7 +15,7 @@ class Core(object):
         environ['SDL_VIDEO_CENTERED'] = '1'
         pg.mixer.pre_init(44100, -16, 2, 1024)
         pg.init()
-        pg.display.set_caption('Super Mario Bros | Liga Acadêmica - UFVJM')
+        pg.display.set_caption('Super Mario Bros | Liga Academica - UFVJM')
         icon = pg.image.load('images/icon.png')
         pg.display.set_icon(icon)
         pg.display.set_mode((WINDOW_W, WINDOW_H))
