@@ -11,6 +11,8 @@ class Mushroom(Entity):
         self.rect = pg.Rect(x_pos, y_pos, 32, 32)
 
         if move_direction:
+            self.x_vel = 1
+
             pass
         else:
             pass

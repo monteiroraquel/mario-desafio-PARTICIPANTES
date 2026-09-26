@@ -491,7 +491,7 @@ class Player(object):
         self.next_fireball_time = pg.time.get_ticks() + 400
 
     def add_coins(self, count):
-        # continuar ... 
+        self.coins += count
         pass
 
     def add_score(self, count):

@@ -30,7 +30,7 @@ class Goombas(Entity):
             core.get_map().get_player().add_score(core.get_map().score_for_killing_mob)
             core.get_map().spawn_score_text(self.rect.x + 16, self.rect.y)
 
-            if crushed:
+            if  self.y_vel < 0:
                 self.crushed = True
                 self.image_tick = 0
                 self.current_image = 2
@@ -39,11 +39,11 @@ class Goombas(Entity):
                 self.collision = False
 
             else:
-                self.y_vel = -4
+                self.y_vel = - 4
                 self.current_image = 3
                 core.get_sound().play('shot', 0, 0.5)
                 self.state = -1
-                self.collision = False
+                self.collision = True
 
         else:
             core.get_map().get_mobs().remove(self)
@@ -53,7 +53,7 @@ class Goombas(Entity):
             if self.rect.colliderect(core.get_map().get_player().rect):
                 if self.state != -1:
                     if core.get_map().get_player().y_vel < 0:
-                        self.die(core, instantly=False, crushed=True)
+                        self.die(core, instantly=True, crushed= True)
                         core.get_map().get_player().reset_jump()
                         core.get_map().get_player().jump_on_mob()
                     else:
@@ -62,9 +62,10 @@ class Goombas(Entity):
 
     def update_image(self):
         self.image_tick += 1
-        if self.image_tick == 14:
+        resto = self.image_tick % 2
+        if resto == 0:
             self.current_image = 1
-        elif self.image_tick == 28:
+        elif resto != 0:
             self.current_image = 0
 
     def update(self, core):

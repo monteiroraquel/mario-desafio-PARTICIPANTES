@@ -83,21 +83,21 @@ python main.py
 
 ### 🟢 Fáceis (10 pts cada)
 
-**#1 — A gravidade está ao contrário**
+**#1 — A gravidade está ao contrário** // Feito
 📁 Arquivo: `Const.py`
 Jogue o início da fase e preste atenção em como o Mario cai depois de
 pular. O esperado é que ele suba, atinja o ponto mais alto e desça,
 acelerando conforme cai — como qualquer objeto que você joga pra cima na
 vida real. Tem algo puxando o Mario e os inimigos pro lado errado.
 
-**#2 — Inimigo "tremendo" na parede**
+**#2 — Inimigo "tremendo" na parede**  // Feito
 📁 Arquivo: `Entity.py`
 Observe um Goomba ou Koopa andando até esbarrar numa parede ou bloco. O
 esperado: ele deveria **virar de direção e continuar andando normalmente**,
 como um "ricochete". Em vez disso, algo estranho acontece nesse momento —
 o inimigo trava ou fica vibrando no lugar, sem seguir em frente.
 
-**#3 — O cogumelo não sai do lugar**
+**#3 — O cogumelo não sai do lugar** //Feito
 📁 Arquivo: `Mushroom.py`
 Quebre um bloco de interrogação que solta um cogumelo (power-up de
 crescimento). Observe o que ele faz assim que "nasce". O comportamento
@@ -110,14 +110,14 @@ movimento está incompleto: vocês vão precisar escrevê-lo.
 
 ### 🟡 Médios (20 pts cada)
 
-**#4 — Pisar no inimigo faz o oposto do esperado**
+**#4 — Pisar no inimigo faz o oposto do esperado** // Não feito
 📁 Arquivo: `Goombas.py`
 No Super Mario clássico, pular em cima de um Goomba o esmaga (mata) e não
 machuca o Mario. Encostar nele de lado, sem pular por cima, é que machuca o
 Mario. Testem as duas situações neste jogo e comparem com o que
 deveria acontecer.
 
-**#5 — A animação do Goomba congela**
+**#5 — A animação do Goomba congela** // Feito
 📁 Arquivo: `Goombas.py`
 Deixe um Goomba andando livremente por 10-15 segundos, sem interagir com
 ele, e observe o sprite (a imagem) dele bem de perto. O Goomba deveria
@@ -125,7 +125,7 @@ continuar animando as perninhas indefinidamente enquanto anda, mas depois
 de um tempinho a imagem para de mudar, como se ele "travasse" visualmente
 (mesmo continuando a se mover).
 
-**#6 — Contador de moedas não soma**
+**#6 — Contador de moedas não soma** // Feito
 📁 Arquivo: `Player.py`
 Colete duas ou mais moedas seguidas e observe o número de moedas mostrado
 no HUD (canto da tela). O esperado é que o contador **acumule** — 1, depois
@@ -133,7 +133,7 @@ no HUD (canto da tela). O esperado é que o contador **acumule** — 1, depois
 Mario pegue. O trecho de código que deveria somar as moedas está
 incompleto: vocês vão precisar escrevê-lo.
 
-**#7 — Casco chutado não sai do lugar**
+**#7 — Casco chutado não sai do lugar**  // Não foi feito
 📁 Arquivo: `Koopa.py`
 Pule em cima de um Koopa (tartaruga) até ele virar um casco parado, e
 depois encoste nele de novo pra "chutá-lo". O casco deveria sair

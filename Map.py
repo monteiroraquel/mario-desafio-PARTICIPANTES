@@ -352,9 +352,9 @@ class Map(object):
         self.get_player().reset_jump()
         self.get_player().reset_move()
         self.get_player().numOfLives -= 1
+        
 
         if self.get_player().numOfLives == 0:
-            #continuar ...
             pass
         else:
             pass
